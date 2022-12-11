@@ -1,0 +1,10 @@
+{
+    "smtpOptions": {
+        "host": "mail.ks2.nmt.com.hk",
+        "port": 587,
+        "auth": {
+            "user": "email-action@ks2.nmt.com.hk",
+            "pass": "123456"
+        }
+    }
+}
