@@ -16,9 +16,7 @@ export const setLuckyNum = (value) => {
 const sortByNum = (n1, n2) => parseInt(n1) - parseInt(n2);
 
 const delay = (time) => {
-  console.log('delay', time);
   return new Promise((resolve) => {
-    console.log('delaying', time);
     global.setTimeout(resolve, time);
   });
 };
@@ -130,12 +128,12 @@ const filterBySum = (text) => {
 
 const filterByScore = (text) => {
   const score = calculateScore(text);
-  const attrs = ["max", "min", "match", "score"];
+  const attrs = ["max", "min"];
   let isValid = true;
   for (const attr of attrs) {
-    for (let i = 1; i <= 4; i++) {
-      const avg = mark6ScoreMap.get(attr)?.avg;
-      const std = mark6ScoreMap.get(attr)?.std;
+    for (let i = 2; i <= 4; i++) {
+      const avg = mark6TrendMap.get(attr + '_' + i)?.avg;
+      const std = mark6TrendMap.get(attr + '_' + i)?.std;
       if (!isNaN(score?.[i]?.[attr]) && avg && std) {
         let delta = score?.[i]?.[attr] - avg;
         if (delta < 0) delta = delta * -1;
@@ -145,7 +143,6 @@ const filterByScore = (text) => {
       }
     }
   }
-  if (score.max < targetMax) isValid = false;
   if (isValid) {
     if (DEBUG) console.log("passed", text);
   } else {
@@ -160,10 +157,11 @@ const generatePossibileGeneration = async (seq) => {
     return resultMap.get(key);
   }
   let lastIndex = 0;
-  const filter = filterBySum;
+  let filter = filterBySum;
   const firstRound = await generateAllCombination({ seq, filter, lastIndex });
   console.log("firstRound", firstRound);
-  const secondRound = await generateAllCombination(firstRound);
+  filter = filterByScore;
+  const secondRound = await generateAllCombination({...firstRound, filter});
   console.log("secondRound", secondRound);
   resultMap.set(key, secondRound.results);
   return secondRound.results;
@@ -207,34 +205,34 @@ const generateCombination = async (numbers, count, filter) => {
 
 const generateCombinationImpl = (parents, numbers, remain, filter, results) => {
   return new Promise(async (resolve) => {
-      if (results.length > 0) {
-        resolve();
-      } else if (remain > 0) {
-        randomize(numbers);
-        if (generateCount < TRIAL_LIMIT) {
-          for (const num of numbers) {
-            if (parents.indexOf(num) === -1) {
-              promises.push(
-                generateCombinationImpl(
-                  [...parents, num],
-                  numbers,
-                  remain - 1,
-                  filter,
-                  results
-                )
-              );
-            }
+    if (results.length > 0) {
+      resolve();
+    } else if (remain > 0) {
+      randomize(numbers);
+      if (generateCount < TRIAL_LIMIT) {
+        for (const num of numbers) {
+          if (parents.indexOf(num) === -1) {
+            promises.push(
+              generateCombinationImpl(
+                [...parents, num],
+                numbers,
+                remain - 1,
+                filter,
+                results
+              )
+            );
           }
         }
-        resolve();
-      } else {
-        generateCount++;
-        if (generateCount % TRIAL_ALERT === 0) {
-          console.log("generateCount", generateCount);
-        }
-        addCombinationToResultSet(parents, filter, results);
-        resolve();
       }
+      resolve();
+    } else {
+      generateCount++;
+      if (generateCount % TRIAL_ALERT === 0) {
+        console.log("generateCount", generateCount);
+      }
+      addCombinationToResultSet(parents, filter, results);
+      resolve();
+    }
   });
 };
 
@@ -296,6 +294,7 @@ export const generateMark6PossibleResults = async () => {
     total[i].max = max?.reduce((sp, s) => (sp || 0) + s);
     total[i].match = match?.reduce((sp, s) => (sp || 0) + s);
   }
+  resultMap.set('results', { results, scores, total })
   console.log({ results, scores, total });
   const endTime = moment();
   const processingTime = endTime.diff(startTime);

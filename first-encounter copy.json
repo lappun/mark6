@@ -1,1 +1,614 @@
-{"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49]":["[10,11,20,23,48,7]","[1,12,17,22,40,45]","[18,2,21,25,30,5]","[13,15,3,31,33,42]","[28,29,34,47,49,9]","[14,19,27,35,41,46]","[16,32,37,4,6,8]","[24,26,36,38,39,43]"]}
+{
+    "[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49]": [
+        "[2,12,20,22,42,48]",
+        "[16,34,37,46,47,49]",
+        "[1,6,24,30,32,44]",
+        "[3,5,9,10,11,36]",
+        "[19,25,26,28,38,39]",
+        "[7,21,23,31,33,40]",
+        "[4,8,13,17,18,41]",
+        "[14,27,29,35,43,45]"
+    ],
+    "findByCondition_[15]": "[15,28,35,38,47,48]",
+    "[15,1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25,26,27,29,30,31,32,33,34,36,37,39,40,41,42,43,44,45,46,49]": [
+        "[1,17,20,29,30,31]",
+        "[6,10,11,22,39,40]",
+        "[15,19,36,37,46,49]",
+        "[2,5,9,12,16,21]",
+        "[3,23,26,27,42,45]",
+        "[7,8,14,18,32,34]",
+        "[4,25,33,41,43,44]"
+    ],
+    "findByCondition_[13,24]": "[7,13,13,21,23,24]",
+    "results": {
+        "results": [
+            "[2,12,20,22,42,48]",
+            "[16,34,37,46,47,49]",
+            "[1,6,24,30,32,44]",
+            "[3,5,9,10,11,36]",
+            "[19,25,26,28,38,39]",
+            "[7,21,23,31,33,40]",
+            "[4,8,13,17,18,41]",
+            "[14,27,29,35,43,45]",
+            "[15,28,35,38,47,48]",
+            "[1,17,20,29,30,31]",
+            "[6,10,11,22,39,40]",
+            "[15,19,36,37,46,49]",
+            "[2,5,9,12,16,21]",
+            "[3,23,26,27,42,45]",
+            "[7,8,14,18,32,34]",
+            "[4,25,33,41,43,44]",
+            "[7,13,13,21,23,24]"
+        ],
+        "scores": [
+            {
+                "1": {
+                    "max": 44,
+                    "min": 29,
+                    "matched": 6,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 1.5172413793103448
+                },
+                "2": {
+                    "max": 9,
+                    "min": 1,
+                    "matched": 28,
+                    "unmatched": 2,
+                    "match": 0.9333333333333333,
+                    "score": 9
+                },
+                "3": {
+                    "max": 1,
+                    "min": 1,
+                    "matched": 42,
+                    "unmatched": 78,
+                    "match": 0.35,
+                    "score": 1
+                },
+                "4": {
+                    "matched": 0,
+                    "unmatched": 360,
+                    "match": 0,
+                    "score": null
+                }
+            },
+            {
+                "1": {
+                    "max": 42,
+                    "min": 28,
+                    "matched": 6,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 1.5
+                },
+                "2": {
+                    "max": 5,
+                    "min": 1,
+                    "matched": 30,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 5
+                },
+                "3": {
+                    "matched": 18,
+                    "unmatched": 102,
+                    "match": 0.15,
+                    "score": 1,
+                    "max": 1,
+                    "min": 1
+                },
+                "4": {
+                    "matched": 0,
+                    "unmatched": 360,
+                    "match": 0,
+                    "score": null
+                }
+            },
+            {
+                "1": {
+                    "max": 49,
+                    "min": 35,
+                    "matched": 6,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 1.4
+                },
+                "2": {
+                    "max": 9,
+                    "min": 1,
+                    "matched": 30,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 9
+                },
+                "3": {
+                    "matched": 66,
+                    "unmatched": 54,
+                    "match": 0.55,
+                    "score": 2,
+                    "max": 2,
+                    "min": 1
+                },
+                "4": {
+                    "matched": 24,
+                    "unmatched": 336,
+                    "match": 0.06666666666666667,
+                    "score": 1,
+                    "max": 1,
+                    "min": 1
+                }
+            },
+            {
+                "1": {
+                    "max": 52,
+                    "min": 25,
+                    "matched": 6,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 2.08
+                },
+                "2": {
+                    "max": 7,
+                    "min": 1,
+                    "matched": 30,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 7
+                },
+                "3": {
+                    "matched": 24,
+                    "unmatched": 96,
+                    "match": 0.2,
+                    "score": 1,
+                    "max": 1,
+                    "min": 1
+                },
+                "4": {
+                    "matched": 0,
+                    "unmatched": 360,
+                    "match": 0,
+                    "score": null
+                }
+            },
+            {
+                "1": {
+                    "max": 48,
+                    "min": 32,
+                    "matched": 6,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 1.5
+                },
+                "2": {
+                    "max": 7,
+                    "min": 2,
+                    "matched": 30,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 3.5
+                },
+                "3": {
+                    "matched": 42,
+                    "unmatched": 78,
+                    "match": 0.35,
+                    "score": 3,
+                    "max": 3,
+                    "min": 1
+                },
+                "4": {
+                    "matched": 0,
+                    "unmatched": 360,
+                    "match": 0,
+                    "score": null
+                }
+            },
+            {
+                "1": {
+                    "max": 46,
+                    "min": 28,
+                    "matched": 6,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 1.6428571428571428
+                },
+                "2": {
+                    "max": 7,
+                    "min": 1,
+                    "matched": 30,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 7
+                },
+                "3": {
+                    "max": 1,
+                    "min": 1,
+                    "matched": 30,
+                    "unmatched": 90,
+                    "match": 0.25,
+                    "score": 1
+                },
+                "4": {
+                    "matched": 0,
+                    "unmatched": 360,
+                    "match": 0,
+                    "score": null
+                }
+            },
+            {
+                "1": {
+                    "max": 41,
+                    "min": 28,
+                    "matched": 6,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 1.4642857142857142
+                },
+                "2": {
+                    "max": 6,
+                    "min": 1,
+                    "matched": 30,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 6
+                },
+                "3": {
+                    "matched": 18,
+                    "unmatched": 102,
+                    "match": 0.15,
+                    "score": 1,
+                    "max": 1,
+                    "min": 1
+                },
+                "4": {
+                    "matched": 0,
+                    "unmatched": 360,
+                    "match": 0,
+                    "score": null
+                }
+            },
+            {
+                "1": {
+                    "max": 40,
+                    "min": 31,
+                    "matched": 6,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 1.2903225806451613
+                },
+                "2": {
+                    "max": 6,
+                    "min": 1,
+                    "matched": 30,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 6
+                },
+                "3": {
+                    "matched": 12,
+                    "unmatched": 108,
+                    "match": 0.1,
+                    "score": 1,
+                    "max": 1,
+                    "min": 1
+                },
+                "4": {
+                    "matched": 0,
+                    "unmatched": 360,
+                    "match": 0,
+                    "score": null
+                }
+            },
+            {
+                "1": {
+                    "max": 48,
+                    "min": 29,
+                    "matched": 6,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 1.6551724137931034
+                },
+                "2": {
+                    "max": 8,
+                    "min": 1,
+                    "matched": 30,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 8
+                },
+                "3": {
+                    "matched": 42,
+                    "unmatched": 78,
+                    "match": 0.35,
+                    "score": 1,
+                    "max": 1,
+                    "min": 1
+                },
+                "4": {
+                    "matched": 0,
+                    "unmatched": 360,
+                    "match": 0,
+                    "score": null
+                }
+            },
+            {
+                "1": {
+                    "max": 49,
+                    "min": 30,
+                    "matched": 6,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 1.6333333333333333
+                },
+                "2": {
+                    "max": 9,
+                    "min": 2,
+                    "matched": 28,
+                    "unmatched": 2,
+                    "match": 0.9333333333333333,
+                    "score": 4.5
+                },
+                "3": {
+                    "matched": 30,
+                    "unmatched": 90,
+                    "match": 0.25,
+                    "score": 1,
+                    "max": 1,
+                    "min": 1
+                },
+                "4": {
+                    "matched": 0,
+                    "unmatched": 360,
+                    "match": 0,
+                    "score": null
+                }
+            },
+            {
+                "1": {
+                    "max": 52,
+                    "min": 28,
+                    "matched": 6,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 1.8571428571428572
+                },
+                "2": {
+                    "max": 9,
+                    "min": 1,
+                    "matched": 30,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 9
+                },
+                "3": {
+                    "max": 1,
+                    "min": 1,
+                    "matched": 36,
+                    "unmatched": 84,
+                    "match": 0.3,
+                    "score": 1
+                },
+                "4": {
+                    "matched": 0,
+                    "unmatched": 360,
+                    "match": 0,
+                    "score": null
+                }
+            },
+            {
+                "1": {
+                    "max": 42,
+                    "min": 29,
+                    "matched": 6,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 1.4482758620689655
+                },
+                "2": {
+                    "max": 6,
+                    "min": 1,
+                    "matched": 28,
+                    "unmatched": 2,
+                    "match": 0.9333333333333333,
+                    "score": 6
+                },
+                "3": {
+                    "matched": 12,
+                    "unmatched": 108,
+                    "match": 0.1,
+                    "score": 2,
+                    "max": 2,
+                    "min": 1
+                },
+                "4": {
+                    "matched": 0,
+                    "unmatched": 360,
+                    "match": 0,
+                    "score": null
+                }
+            },
+            {
+                "1": {
+                    "max": 46,
+                    "min": 28,
+                    "matched": 6,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 1.6428571428571428
+                },
+                "2": {
+                    "max": 7,
+                    "min": 1,
+                    "matched": 30,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 7
+                },
+                "3": {
+                    "matched": 60,
+                    "unmatched": 60,
+                    "match": 0.5,
+                    "score": 2,
+                    "max": 2,
+                    "min": 1
+                },
+                "4": {
+                    "matched": 48,
+                    "unmatched": 312,
+                    "match": 0.13333333333333333,
+                    "score": 1,
+                    "max": 1,
+                    "min": 1
+                }
+            },
+            {
+                "1": {
+                    "max": 35,
+                    "min": 25,
+                    "matched": 6,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 1.4
+                },
+                "2": {
+                    "max": 5,
+                    "min": 1,
+                    "matched": 30,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 5
+                },
+                "3": {
+                    "matched": 6,
+                    "unmatched": 114,
+                    "match": 0.05,
+                    "score": 1,
+                    "max": 1,
+                    "min": 1
+                },
+                "4": {
+                    "matched": 0,
+                    "unmatched": 360,
+                    "match": 0,
+                    "score": null
+                }
+            },
+            {
+                "1": {
+                    "max": 40,
+                    "min": 31,
+                    "matched": 6,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 1.2903225806451613
+                },
+                "2": {
+                    "max": 6,
+                    "min": 1,
+                    "matched": 30,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 6
+                },
+                "3": {
+                    "matched": 30,
+                    "unmatched": 90,
+                    "match": 0.25,
+                    "score": 1,
+                    "max": 1,
+                    "min": 1
+                },
+                "4": {
+                    "matched": 0,
+                    "unmatched": 360,
+                    "match": 0,
+                    "score": null
+                }
+            },
+            {
+                "1": {
+                    "max": 40,
+                    "min": 28,
+                    "matched": 6,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 1.4285714285714286
+                },
+                "2": {
+                    "max": 5,
+                    "min": 1,
+                    "matched": 28,
+                    "unmatched": 2,
+                    "match": 0.9333333333333333,
+                    "score": 5
+                },
+                "3": {
+                    "matched": 30,
+                    "unmatched": 90,
+                    "match": 0.25,
+                    "score": 1,
+                    "max": 1,
+                    "min": 1
+                },
+                "4": {
+                    "matched": 0,
+                    "unmatched": 360,
+                    "match": 0,
+                    "score": null
+                }
+            },
+            {
+                "1": {
+                    "max": 46,
+                    "min": 35,
+                    "matched": 6,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 1.3142857142857143
+                },
+                "2": {
+                    "max": 8,
+                    "min": 2,
+                    "matched": 28,
+                    "unmatched": 0,
+                    "match": 1,
+                    "score": 4
+                },
+                "3": {
+                    "max": 2,
+                    "min": 1,
+                    "matched": 60,
+                    "unmatched": 36,
+                    "match": 0.625,
+                    "score": 2
+                },
+                "4": {
+                    "matched": 48,
+                    "unmatched": 168,
+                    "match": 0.2222222222222222,
+                    "score": 1,
+                    "max": 1,
+                    "min": 1
+                }
+            }
+        ],
+        "total": {
+            "1": {
+                "max": 760,
+                "match": 17
+            },
+            "2": {
+                "max": 119,
+                "match": 16.733333333333334
+            },
+            "3": {
+                "max": 23,
+                "match": 4.775
+            },
+            "4": {
+                "max": 1,
+                "match": 0.4222222222222222
+            }
+        }
+    }
+}

@@ -138,17 +138,17 @@ const filterBySum = (text) => {
   const remainder = sum % luckyNum;
   if (DEBUG && remainder === 0) console.log("found match", text, sum);
 
-  return remainder === 0 && filterByScore(text);
+  return remainder === 0;
 };
 
 const filterByScore = (text) => {
   const score = calculateScore(text);
-  const attrs = ["max", "min", "match", "score"];
+  const attrs = ["max", "min"];
   let isValid = true;
   for (const attr of attrs) {
-    for (let i = 1; i <= 4; i++) {
-      const avg = mark6ScoreMap.get(attr)?.avg;
-      const std = mark6ScoreMap.get(attr)?.std;
+    for (let i = 2; i <= 4; i++) {
+      const avg = mark6TrendMap.get(attr + '_' + i)?.avg;
+      const std = mark6TrendMap.get(attr + '_' + i)?.std;
       if (!isNaN(score?.[i]?.[attr]) && avg && std) {
         let delta = score?.[i]?.[attr] - avg;
         if (delta < 0) delta = delta * -1;
@@ -158,7 +158,6 @@ const filterByScore = (text) => {
       }
     }
   }
-  if (score.max < targetMax) isValid = false;
   if (isValid) {
     if (DEBUG) console.log("passed", text);
   } else {
@@ -173,13 +172,16 @@ const generatePossibileGeneration = async (seq) => {
     return resultMap.get(key);
   }
   let lastIndex = 0;
-  const filter = filterBySum;
+  let filter = filterBySum;
   const firstRound = await generateAllCombination({ seq, filter, lastIndex });
   console.log("firstRound", firstRound);
-  const secondRound = await generateAllCombination(firstRound);
+  filter = filterByScore;
+  const secondRound = await generateAllCombination({...firstRound, filter});
   console.log("secondRound", secondRound);
-  resultMap.set(key, secondRound.results);
-  return secondRound.results;
+  const thirdRound = await generateAllCombination({...secondRound});
+  console.log("thirdRound", thirdRound);
+  resultMap.set(key, thirdRound.results);
+  return thirdRound.results;
 };
 
 const generateAllCombination = async ({ seq, filter, lastIndex, results }) => {
@@ -309,6 +311,7 @@ const generateMark6PossibleResults = async () => {
     total[i].max = max?.reduce((sp, s) => (sp || 0) + s);
     total[i].match = match?.reduce((sp, s) => (sp || 0) + s);
   }
+  resultMap.set('results', { results, scores, total })
   console.log({ results, scores, total });
   const endTime = moment();
   const processingTime = endTime.diff(startTime);
@@ -353,31 +356,37 @@ const downloadPreviousResults = async (start, days) => {
   try {
     const response = await axios.get(URL);
     const length = response.data?.length;
+    let count = 0;
     console.log("data length", length);
     if (length > 0) {
       for (const r of response.data) {
-        mark6ResultMap.set(r.id, r);
+        if (mark6ResultMap.get(r.id)) {
+          console.log(r.id, 'already downloaded, skipped.')
+        } else {
+          mark6ResultMap.set(r.id, r);
+          count++;
+        }
       }
     }
     mark6ResultMap.set("start", sd);
-    return length;
+    return count;
   } catch (error) {
     console.log("error", error);
     return 0;
   }
 };
 
-const downloadPreviousNextResults = async () => {
+const downloadPreviousNextResults = async (initial) => {
   const days = 30;
   let start = moment().format("YYYYMMDD");
-  if (mark6ResultMap.get("start")) {
+  if (mark6ResultMap.get("start") && !initial) {
     start = mark6ResultMap.get("start");
   }
   return await downloadPreviousResults(start, days);
 };
 
 const downloadPreviousAllResults = async () => {
-  let length = await downloadPreviousNextResults();
+  let length = await downloadPreviousNextResults(true);
   while (length > 0) {
     await delay(3000);
     length = await downloadPreviousNextResults();
@@ -548,6 +557,38 @@ const findMatch = (combination) => {
   }
 };
 
+const intersect = (l1, l2) => {
+  let count = 0;
+  for (let i = 0; i < l1.length; i++) {
+    for (let j = 0; j < l2.length; j++) {
+      if (l1[i] === l2[j]) {
+        count++
+      }
+    }
+  }
+  return count;
+}
+
+const checkResults = async (length) => {
+  const results = await generateMark6PossibleResults();
+  for (const v of mark6ResultMap
+    .values()
+    .sort((v1, v2) => new Date(v2.date).getTime() - new Date(v1.date).getTime())
+    .slice(0, length ? parseInt(length, 10) : 10)) {
+    if (v.no && v.sno) {
+      console.log('v', v.date, v.no, v.sno);
+      for (const r of results) {
+        const nums = JSON.parse(r);
+        const t1 = [...(v.no.split('+'))].map(s => parseInt(s, 10));
+        const t2 = [v.sno].map(s => parseInt(s, 10));
+        const n = intersect(t1, nums);
+        const s = intersect(t2, nums);
+        console.log('ticket', nums, 'n:', n, 's:', s);
+      }
+    }
+  }
+}
+
 const args = process.argv;
 if (args.length < 3) {
   const usage = `
@@ -556,6 +597,8 @@ if (args.length < 3) {
   update-score
   show-trend [length]
   find-match [pattern]
+  download-result
+  check-result [count]
   `;
   console.log(usage);
 } else if (args.length >= 3) {
@@ -580,5 +623,9 @@ if (args.length < 3) {
     showTrend(p2);
   } else if (p1 === "find-match") {
     findMatch(p2);
+  } else if (p1 === "download-result") {
+    downloadPreviousAllResults();
+  } else if (p1 === 'check-result') {
+    checkResults(p2);
   }
 }
