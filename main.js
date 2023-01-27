@@ -393,6 +393,26 @@ const downloadPreviousAllResults = async () => {
   }
 };
 
+const convertAllResults = async () => {
+  const values = mark6ResultMap.values();
+  const lines = [];
+  const columns = ['id', 'date', 'no', 'sno', 'moment'];
+  lines.push(columns)
+  for (const row of values) {
+    let isEmpty = true;
+    if (row.date) {
+      row.moment = moment(row.date, 'DD/MM/yyyy').format()
+    }
+    columns.forEach((attr) => {
+      if (row[attr]) isEmpty = false;
+    })
+    if (!isEmpty) {
+      lines.push(columns.map((attr) => row[attr]));
+    }
+  }
+  fs.writeFileSync('mark6-result.csv', '"' + lines.map(l => l.join('","')).join('"\r\n"') + '"');
+}
+
 const sortScrollMap = (scoreMap) => {
   const scoreList = Object.keys(scoreMap);
   scoreList.sort((a, b) => scoreMap[b] - scoreMap[a]);
@@ -598,6 +618,7 @@ if (args.length < 3) {
   show-trend [length]
   find-match [pattern]
   download-result
+  convert-result
   check-result [count]
   `;
   console.log(usage);
@@ -625,6 +646,8 @@ if (args.length < 3) {
     findMatch(p2);
   } else if (p1 === "download-result") {
     downloadPreviousAllResults();
+  } else if (p1 === "convert-result") {
+    convertAllResults();
   } else if (p1 === 'check-result') {
     checkResults(p2);
   }
